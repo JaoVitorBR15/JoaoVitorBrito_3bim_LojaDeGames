@@ -149,15 +149,12 @@ async function criarJogo(req, res) {
 ===================================================== */
 
 async function atualizarJogo(req, res) {
-
     try {
-
         const { id } = req.params;
 
         const {
             nome,
             data_lancamento,
-            imagem,
             id_desenvolvedora
         } = req.body;
 
@@ -166,20 +163,17 @@ async function atualizarJogo(req, res) {
             SET
                 nome = $1,
                 data_lancamento = $2,
-                imagem = $3,
-                id_desenvolvedora = $4
-            WHERE id_jogo = $5
+                id_desenvolvedora = $3
+            WHERE id_jogo = $4
             RETURNING *
         `, [
             nome,
             data_lancamento,
-            imagem,
             id_desenvolvedora,
             id
         ]);
 
         if (resultado.rows.length === 0) {
-
             return res.status(404).json({
                 erro: 'Jogo não encontrado.'
             });
@@ -189,9 +183,7 @@ async function atualizarJogo(req, res) {
             mensagem: 'Jogo atualizado com sucesso!',
             jogo: resultado.rows[0]
         });
-
     } catch (erro) {
-
         console.error(erro);
 
         res.status(500).json({
