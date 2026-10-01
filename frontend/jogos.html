@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store | Jogos</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/jogos.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a class="logo" href="index.html">🎮 Game Store</a>
+            <nav>
+                <a href="index.html">Início</a>
+                <a class="active" href="jogos.html">Jogos</a>
+                <a href="plataformas.html">Plataformas</a>
+                <a href="desenvolvedoras.html">Desenvolvedoras</a>
+                <a href="clientes.html">Clientes</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page">
+        <section class="page-heading">
+            <div>
+                <p class="eyebrow">CATÁLOGO</p>
+                <h1>Jogos</h1>
+                <p>Cadastre e gerencie os jogos da Game Store.</p>
+            </div>
+            <button class="btn btn-primary" id="btnNovoJogo">+ Novo jogo</button>
+        </section>
+
+        <section class="toolbar">
+            <input type="search" id="buscaJogo" placeholder="Pesquisar por nome do jogo...">
+            <button class="btn btn-secondary" id="btnAtualizar">Atualizar lista</button>
+        </section>
+
+        <section id="mensagem" class="message hidden"></section>
+
+        <section id="formSection" class="panel hidden">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow">CADASTRO</p>
+                    <h2 id="formTitulo">Novo jogo</h2>
+                </div>
+                <button class="icon-button" id="btnFecharForm" title="Fechar">×</button>
+            </div>
+
+            <form id="jogoForm">
+                <input type="hidden" id="idJogo">
+
+                <div class="form-grid">
+                    <label>
+                        Nome do jogo
+                        <input type="text" id="nome" required maxlength="150">
+                    </label>
+
+                    <label>
+                        Data de lançamento
+                        <input type="date" id="dataLancamento" required>
+                    </label>
+
+                    <label>
+                        Desenvolvedora
+                        <select id="desenvolvedora" required>
+                            <option value="">Selecione...</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Capa do jogo
+                        <input type="file" id="imagem" accept="image/*">
+                    </label>
+                </div>
+
+                <div class="cover-upload">
+                    <div class="cover-preview" id="coverPreview">
+                        <span>🎮</span>
+                        <small>Prévia da capa</small>
+                    </div>
+                    <div>
+                        <strong>Imagem da capa</strong>
+                        <p>Depois de salvar o jogo, selecione uma imagem para enviá-la ao servidor.</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Plataformas</h3>
+                    <p class="muted">Selecione todas as plataformas em que o jogo está disponível.</p>
+                    <div id="plataformasCheckboxes" class="checkbox-grid"></div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Detalhes do jogo</h3>
+                    <div class="form-grid">
+                        <label class="full">
+                            Descrição
+                            <textarea id="descricao" rows="4" required></textarea>
+                        </label>
+
+                        <label>
+                            Classificação indicativa
+                            <select id="classificacao">
+                                <option value="Livre">Livre</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
+                                <option value="14">14</option>
+                                <option value="16">16</option>
+                                <option value="18">18</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Número de jogadores
+                            <input type="number" id="numeroJogadores" min="1" value="1" required>
+                        </label>
+
+                        <label>
+                            Modo de jogo
+                            <input type="text" id="modoJogo" value="Single-player" required>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar jogo</button>
+                </div>
+            </form>
+        </section>
+
+        <section>
+            <div id="loading" class="loading">Carregando jogos...</div>
+            <div id="jogosGrid" class="games-grid"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>João Vitor Brito • 1º EM • 2026</p>
+            <p>Projeto de Desenvolvimento Web 1</p>
+        </div>
+    </footer>
+
+    <script src="js/jogos.js"></script>
+</body>
+</html>

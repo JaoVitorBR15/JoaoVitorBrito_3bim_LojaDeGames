@@ -1,0 +1,10 @@
+.panel {
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    th:nth-child(1),
+    td:nth-child(1) {
+        display: none;
+    }
+}

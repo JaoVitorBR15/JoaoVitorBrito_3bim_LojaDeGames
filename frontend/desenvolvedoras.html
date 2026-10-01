@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store | Desenvolvedoras</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/crud.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a class="logo" href="index.html">🎮 Game Store</a>
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="jogos.html">Jogos</a>
+                <a href="plataformas.html">Plataformas</a>
+                <a class="active" href="desenvolvedoras.html">Desenvolvedoras</a>
+                <a href="clientes.html">Clientes</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page">
+        <section class="page-heading">
+            <div>
+                <p class="eyebrow">CADASTRO</p>
+                <h1>Desenvolvedoras</h1>
+                <p>Empresas responsáveis pelo desenvolvimento dos jogos.</p>
+            </div>
+            <button class="btn btn-primary" id="btnNovo">+ Nova desenvolvedora</button>
+        </section>
+
+        <section id="mensagem" class="message hidden"></section>
+
+        <section id="formSection" class="panel hidden">
+            <div class="panel-header">
+                <h2 id="formTitulo">Nova desenvolvedora</h2>
+                <button class="icon-button" id="btnFechar">×</button>
+            </div>
+            <form id="form">
+                <input type="hidden" id="id">
+                <div class="form-grid">
+                    <label>
+                        Nome
+                        <input type="text" id="nome" maxlength="100" required>
+                    </label>
+                    <label>
+                        País
+                        <input type="text" id="pais" maxlength="60" required>
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Desenvolvedoras cadastradas</h2>
+                <button class="btn btn-secondary" id="btnAtualizar">Atualizar</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>País</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>João Vitor Brito • 1º EM • 2026</p>
+            <p>Projeto de Desenvolvimento Web 1</p>
+        </div>
+    </footer>
+
+    <script src="js/desenvolvedoras.js"></script>
+</body>
+</html>
