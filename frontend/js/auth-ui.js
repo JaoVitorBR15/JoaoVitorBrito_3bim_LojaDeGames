@@ -52,21 +52,39 @@ async function sairDaConta() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const botaoSair = document.getElementById('btnSair');
-    if (botaoSair) botaoSair.addEventListener('click', sairDaConta);
-
+    const nav = document.querySelector('.header-content nav');
     const usuario = await obterSessao();
     const linkEntrar = document.getElementById('linkEntrar');
-    if (usuario && linkEntrar) linkEntrar.classList.add('hidden');
+
+    if (usuario) {
+        if (linkEntrar) linkEntrar.classList.add('hidden');
+
+        if (nav) {
+            const linkLogin = nav.querySelector('a[href="login.html"]');
+            if (linkLogin) {
+                linkLogin.href = usuario.tipo_usuario === 'admin' ? 'admin.html' : 'minha-conta.html';
+                linkLogin.textContent = usuario.tipo_usuario === 'admin' ? 'Painel admin' : 'Minha conta';
+            }
+
+            const linkConta = nav.querySelector('a[href="minha-conta.html"]');
+            if (usuario.tipo_usuario === 'admin' && linkConta) {
+                linkConta.href = 'admin.html';
+                linkConta.textContent = 'Painel admin';
+            }
+
+            if (!nav.querySelector('[data-auth-logout]')) {
+                const botao = document.createElement('button');
+                botao.type = 'button';
+                botao.className = 'btn btn-secondary';
+                botao.textContent = 'Sair';
+                botao.dataset.authLogout = 'true';
+                botao.addEventListener('click', sairDaConta);
+                nav.appendChild(botao);
+            }
+        }
+    }
 
     document.querySelectorAll('nav a[href="admin.html"], nav a[href="clientes.html"], nav a[href="jogos.html"], nav a[href="plataformas.html"], nav a[href="desenvolvedoras.html"]').forEach(link => {
         if (!usuario || usuario.tipo_usuario !== 'admin') link.classList.add('hidden');
     });
-
-    if (usuario && usuario.tipo_usuario === 'admin') {
-        document.querySelectorAll('nav a[href="minha-conta.html"]').forEach(link => {
-            link.href = 'admin.html';
-            link.textContent = 'Painel admin';
-        });
-    }
 });
