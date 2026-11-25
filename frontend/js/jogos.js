@@ -33,7 +33,7 @@ async function carregarJogos() {
     loading.classList.remove('hidden');
 
     try {
-        const resposta = await fetch(`${API}/jogo/listar`);
+        const resposta = await fetch(`${API}/jogo/listar`, { credentials: 'include' });
 
         if (!resposta.ok) {
             throw new Error('Erro ao buscar jogos.');
@@ -61,7 +61,7 @@ async function carregarPlataformasDosJogos() {
 
             const resposta = await fetch(
                 `${API}/jogo/${jogo.id_jogo}/plataformas`
-            );
+            , { credentials: 'include' });
 
             jogo.plataformas = resposta.ok
                 ? await resposta.json()
@@ -81,7 +81,7 @@ async function carregarDesenvolvedoras() {
     try {
 
         const resposta =
-            await fetch(`${API}/desenvolvedora/listar`);
+            await fetch(`${API}/desenvolvedora/listar`, { credentials: 'include' });
 
         const dados = await resposta.json();
 
@@ -122,7 +122,7 @@ async function carregarPlataformas() {
     try {
 
         const resposta =
-            await fetch(`${API}/plataforma/listar`);
+            await fetch(`${API}/plataforma/listar`, { credentials: 'include' });
 
         plataformas = await resposta.json();
 
@@ -305,7 +305,7 @@ async function editarJogo(id) {
     try {
 
         const resposta =
-            await fetch(`${API}/jogo/${id}`);
+            await fetch(`${API}/jogo/${id}`, { credentials: 'include' });
 
         if (!resposta.ok) {
             throw new Error();
@@ -349,7 +349,7 @@ async function editarJogo(id) {
         }
 
         const respostaPlataformas =
-            await fetch(`${API}/jogo/${id}/plataformas`);
+            await fetch(`${API}/jogo/${id}/plataformas`, { credentials: 'include' });
 
         const plataformasJogo =
             respostaPlataformas.ok
@@ -418,7 +418,7 @@ jogoForm.addEventListener('submit', async event => {
             ? 'PUT'
             : 'POST';
 
-        const resposta = await fetch(url, {
+        const resposta = await fetch(url, { credentials: 'include',
             method: metodo,
             headers: {
                 'Content-Type': 'application/json'
@@ -491,7 +491,7 @@ async function salvarDetalhes(id) {
     };
 
     const resposta =
-        await fetch(`${API}/jogo/${id}/detalhes`, {
+        await fetch(`${API}/jogo/${id}/detalhes`, { credentials: 'include',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -516,7 +516,7 @@ async function salvarPlataformas(id) {
             .map(cb => Number(cb.value));
 
     const resposta =
-        await fetch(`${API}/jogo/${id}/plataformas`, {
+        await fetch(`${API}/jogo/${id}/plataformas`, { credentials: 'include',
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -543,7 +543,7 @@ async function enviarImagem(id, arquivo) {
     formData.append('imagem', arquivo);
 
     const resposta =
-        await fetch(`${API}/jogo/${id}/imagem`, {
+        await fetch(`${API}/jogo/${id}/imagem`, { credentials: 'include',
             method: 'POST',
             body: formData
         });
@@ -579,7 +579,7 @@ async function excluirJogo(id) {
     try {
 
         const resposta =
-            await fetch(`${API}/jogo/${id}`, {
+            await fetch(`${API}/jogo/${id}`, { credentials: 'include',
                 method: 'DELETE'
             });
 
