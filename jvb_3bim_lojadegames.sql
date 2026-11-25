@@ -489,18 +489,18 @@ INSERT INTO clientes (nome, email, telefone) VALUES
 INSERT INTO usuarios
 (nome_usuario, email_usuario, senha_usuario, tipo_usuario, id_cliente)
 VALUES
-('João Silva', 'joao.silva@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 1),
-('Pedro Santos', 'pedro.santos@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 2),
-('Lucas Oliveira', 'lucas.oliveira@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 3),
-('Gabriel Souza', 'gabriel.souza@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 4),
-('Matheus Costa', 'matheus.costa@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 5),
-('Rafael Almeida', 'rafael.almeida@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 6),
-('Felipe Rodrigues', 'felipe.rodrigues@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 7),
-('Gustavo Pereira', 'gustavo.pereira@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 8),
-('Bruno Martins', 'bruno.martins@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 9),
-('André Ferreira', 'andre.ferreira@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 10),
-('Henrique Gomes', 'henrique.gomes@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 11),
-('Daniel Ribeiro', 'daniel.ribeiro@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 12);
+('João Silva', 'joao.silva@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 1),
+('Pedro Santos', 'pedro.santos@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 2),
+('Lucas Oliveira', 'lucas.oliveira@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 3),
+('Gabriel Souza', 'gabriel.souza@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 4),
+('Matheus Costa', 'matheus.costa@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 5),
+('Rafael Almeida', 'rafael.almeida@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 6),
+('Felipe Rodrigues', 'felipe.rodrigues@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 7),
+('Gustavo Pereira', 'gustavo.pereira@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 8),
+('Bruno Martins', 'bruno.martins@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 9),
+('André Ferreira', 'andre.ferreira@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 10),
+('Henrique Gomes', 'henrique.gomes@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 11),
+('Daniel Ribeiro', 'daniel.ribeiro@email.com', 'cf127c023f0acfae58e0651ddd281194:e06eaa84bb10c69ddb4510c07422c80665c6e18bbb13fc8b9fc1576dc87c2d5ab933b00696c0a621e4a316e06140136126f8dad5fa9eacda10225030c108bf83', 'cliente', 12);
 
 
 /* =========================================================
