@@ -1,0 +1,10 @@
+.auth-page { padding: 52px 0 72px; max-width: 1000px; }
+.auth-intro { margin-bottom: 28px; }
+.auth-intro h1 { margin: 8px 0; font-size: clamp(2rem, 5vw, 3rem); }
+.auth-intro p:last-child { color: var(--muted); max-width: 650px; }
+.auth-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.auth-grid h2, .session-panel h2 { margin-top: 0; }
+.auth-grid form { display: flex; flex-direction: column; gap: 12px; }
+.auth-button { margin-top: 10px; width: 100%; }
+.session-panel { margin-top: 22px; }
+@media (max-width: 720px) { .auth-grid { grid-template-columns: 1fr; } }
