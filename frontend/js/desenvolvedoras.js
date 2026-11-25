@@ -19,7 +19,7 @@ function mensagemExibir(texto, tipo = 'success') {
 async function carregar() {
     try {
         const resposta =
-            await fetch(`${API}/desenvolvedora/listar`);
+            await fetch(`${API}/desenvolvedora/listar`, { credentials: 'include' });
 
         if (!resposta.ok) throw new Error();
 
@@ -76,7 +76,7 @@ async function editar(id) {
     try {
 
         const resposta =
-            await fetch(`${API}/desenvolvedora/${id}`);
+            await fetch(`${API}/desenvolvedora/${id}`, { credentials: 'include' });
 
         if (!resposta.ok) throw new Error();
 
@@ -118,7 +118,7 @@ async function excluir(id) {
     try {
 
         const resposta =
-            await fetch(`${API}/desenvolvedora/${id}`, {
+            await fetch(`${API}/desenvolvedora/${id}`, { credentials: 'include',
                 method: 'DELETE'
             });
 
@@ -162,7 +162,7 @@ form.addEventListener('submit', async event => {
             modoEdicao
                 ? `${API}/desenvolvedora/${id}`
                 : `${API}/desenvolvedora`,
-            {
+            { credentials: 'include',
                 method: modoEdicao ? 'PUT' : 'POST',
                 headers: {
                     'Content-Type': 'application/json'
