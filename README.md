@@ -108,6 +108,14 @@ npm run dev
 
 A API ficará disponível em `http://localhost:3001`. Abra o frontend usando uma extensão de servidor local do editor (por exemplo, Live Server) e acesse `frontend/login.html`.
 
+## Áreas do sistema
+- `frontend/catalogo.html`: catálogo público para visitantes e clientes, com busca e visualização dos detalhes dos jogos.
+- `frontend/minha-conta.html`: área autenticada do cliente, com identificação da conta e acesso ao catálogo.
+- `frontend/admin.html`: painel restrito ao administrador, com atalhos para os CRUDs existentes.
+- `frontend/login.html`: login e cadastro de clientes.
+
+As páginas de gerenciamento (`jogos.html`, `plataformas.html`, `desenvolvedoras.html` e `clientes.html`) redirecionam quem não tem perfil administrativo. A API também valida o perfil, então esconder links na interface não é a única proteção.
+
 ## Autenticação e permissões
 - Cadastro público cria uma conta do tipo `cliente) e o registro correspondente em `clientes`.
 - Login valida a senha no servidor e emite cookie `HttpOnly`.
