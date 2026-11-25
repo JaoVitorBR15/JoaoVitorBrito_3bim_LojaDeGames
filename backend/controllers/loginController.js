@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const { query, pool } = require('../database');
 const { gerarHash, verificarSenha } = require('../utils/password');
 const { criarToken } = require('../utils/authToken');
