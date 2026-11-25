@@ -25,6 +25,63 @@ Projeto acadêmico de Desenvolvimento Web 1. Aplicação cliente-servidor para c
 
 O modelo contém relacionamentos 1:N entre desenvolvedoras e jogos, 1:1 entre jogos e detalhes_jogo, N:N entre jogos e plataformas, e 1:1 opcional entre clientes e usuarios.
 
+
+## Diagrama do banco
+
+```mermaid
+erDiagram
+    DESENVOLVEDORAS ||--o{ JOGOS : desenvolve
+    JOGOS ||--o| DETALHES_JOGO : possui
+    JOGOS ||--o{ JOGO_PLATAFORMA : associa
+    PLATAFORMAS ||--o{ JOGO_PLATAFORMA : recebe
+    CLIENTES ||--o| USUARIOS : possui_conta
+
+    DESENVOLVEDORAS {
+        int id_desenvolvedora PK
+        varchar nome
+        varchar pais
+    }
+    JOGOS {
+        int id_jogo PK
+        varchar nome
+        date data_lancamento
+        varchar imagem
+        int id_desenvolvedora FK
+    }
+    DETALHES_JOGO {
+        int id_jogo PK,FK
+        text descricao
+        varchar classificacao_indicativa
+        int numero_jogadores
+        varchar modo_jogo
+    }
+    PLATAFORMAS {
+        int id_plataforma PK
+        varchar nome
+        varchar fabricante
+    }
+    JOGO_PLATAFORMA {
+        int id_jogo PK,FK
+        int id_plataforma PK,FK
+    }
+    CLIENTES {
+        int id_cliente PK
+        varchar nome
+        varchar email
+        varchar telefone
+    }
+    USUARIOS {
+        int id_usuario PK
+        varchar nome_usuario
+        varchar email_usuario
+        varchar senha_usuario
+        varchar tipo_usuario
+        int id_cliente FK,UK
+    }
+```
+
+A relação entre `CLIENTES` e `USUARIOS` é opcional do lado do usuário administrativo: contas de cliente precisam apontar para um cliente; contas de administrador não possuem `id_cliente`.
+
 ## Configuração
 1. Instale Node.js LTS e PostgreSQL.
 2. Na raiz do projeto, execute `npm install`.
