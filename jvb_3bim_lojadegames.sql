@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS detalhes_jogo CASCADE;
 DROP TABLE IF EXISTS jogos CASCADE;
 DROP TABLE IF EXISTS plataformas CASCADE;
 DROP TABLE IF EXISTS desenvolvedoras CASCADE;
+DROP TABLE IF EXISTS usuarios CASCADE;
 DROP TABLE IF EXISTS clientes CASCADE;
 
 
@@ -119,6 +120,34 @@ CREATE TABLE clientes (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     telefone VARCHAR(20)
+);
+
+/* =========================================================
+   8. TABELA DE USUÁRIOS
+   RELACIONAMENTO: CLIENTES 1:1 USUARIOS (OPCIONAL PARA ADMIN)
+   ========================================================= */
+
+CREATE TABLE usuarios (
+    id_usuario SERIAL PRIMARY KEY,
+    nome_usuario VARCHAR(100) NOT NULL,
+    email_usuario VARCHAR(150) NOT NULL UNIQUE,
+    senha_usuario VARCHAR(255) NOT NULL,
+    tipo_usuario VARCHAR(20) NOT NULL
+        CHECK (tipo_usuario IN ('cliente', 'admin')),
+    id_cliente INT UNIQUE,
+
+    CONSTRAINT fk_usuario_cliente
+        FOREIGN KEY (id_cliente)
+        REFERENCES clientes(id_cliente)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT chk_tipo_usuario_cliente
+        CHECK (
+            (tipo_usuario = 'cliente' AND id_cliente IS NOT NULL)
+            OR
+            (tipo_usuario = 'admin' AND id_cliente IS NULL)
+        )
 );
 
 
@@ -452,7 +481,30 @@ INSERT INTO clientes (nome, email, telefone) VALUES
 
 
 /* =========================================================
-   14. CONSULTAS DE TESTE
+   15. INSERTS - USUÁRIOS DE TESTE
+   Senha temporária comum: GameStore@123
+   Troque as senhas antes de publicar o sistema.
+   ========================================================= */
+
+INSERT INTO usuarios
+(nome_usuario, email_usuario, senha_usuario, tipo_usuario, id_cliente)
+VALUES
+('João Silva', 'joao.silva@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 1),
+('Pedro Santos', 'pedro.santos@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 2),
+('Lucas Oliveira', 'lucas.oliveira@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 3),
+('Gabriel Souza', 'gabriel.souza@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 4),
+('Matheus Costa', 'matheus.costa@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 5),
+('Rafael Almeida', 'rafael.almeida@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 6),
+('Felipe Rodrigues', 'felipe.rodrigues@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 7),
+('Gustavo Pereira', 'gustavo.pereira@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 8),
+('Bruno Martins', 'bruno.martins@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 9),
+('André Ferreira', 'andre.ferreira@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 10),
+('Henrique Gomes', 'henrique.gomes@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 11),
+('Daniel Ribeiro', 'daniel.ribeiro@email.com', '1a067526a8a135811f00be026507e7fd:06cf219dbab6e1c13ec1a50624137cadc10ea329caa318163d8dc1a8559b3be3bd9fbc5b627985bf6ca926cf019c04a4e8ca50d221bf49681dac66d669492690', 'cliente', 12);
+
+
+/* =========================================================
+   16. CONSULTAS DE TESTE
    ========================================================= */
 
 /* Listar todos os jogos */

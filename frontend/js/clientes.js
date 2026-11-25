@@ -20,7 +20,7 @@ async function carregar() {
     try {
 
         const resposta =
-            await fetch(`${API}/cliente/listar`);
+            await fetch(`${API}/cliente/listar`, { credentials: 'include' });
 
         if (!resposta.ok) throw new Error();
 
@@ -86,7 +86,7 @@ async function editar(id) {
     try {
 
         const resposta =
-            await fetch(`${API}/cliente/${id}`);
+            await fetch(`${API}/cliente/${id}`, { credentials: 'include' });
 
         if (!resposta.ok) throw new Error();
 
@@ -135,7 +135,7 @@ async function excluir(id) {
     try {
 
         const resposta =
-            await fetch(`${API}/cliente/${id}`, {
+            await fetch(`${API}/cliente/${id}`, { credentials: 'include',
                 method: 'DELETE'
             });
 
@@ -181,7 +181,7 @@ form.addEventListener('submit', async event => {
             modoEdicao
                 ? `${API}/cliente/${id}`
                 : `${API}/cliente`,
-            {
+            { credentials: 'include',
                 method: modoEdicao ? 'PUT' : 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,11 +1,12 @@
 {
   "name": "gamestore",
   "version": "1.0.0",
-  "description": "Loja de videogames - Projeto DW1 3º Bimestre",
+  "description": "Loja de videogames - Projeto DW1 4º Bimestre",
   "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js"
+    "dev": "nodemon backend/server.js",
+    "admin:criar": "node backend/scripts/criarAdmin.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
