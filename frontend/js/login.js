@@ -33,7 +33,8 @@ formLogin.addEventListener('submit', async (evento) => {
         const resultado = await enviarRequisicao('login', dados);
         mostrarMensagem(resultado.mensagem);
         formLogin.reset();
-        await consultarSessao();
+        const usuario = resultado.usuario;
+        window.location.href = usuario.tipo_usuario === 'admin' ? 'admin.html' : 'minha-conta.html';
     } catch (erro) {
         mostrarMensagem(erro.message, 'error');
     }
@@ -82,4 +83,20 @@ btnSair.addEventListener('click', async () => {
     }
 });
 
-consultarSessao();
+(async () => {
+    const usuario = await obterUsuarioAtual();
+    if (usuario) {
+        window.location.href = usuario.tipo_usuario === 'admin' ? 'admin.html' : 'minha-conta.html';
+    }
+})();
+
+async function obterUsuarioAtual() {
+    try {
+        const resposta = await fetch(`${API_URL}/sessao`, { credentials: 'include' });
+        if (!resposta.ok) return null;
+        const dados = await resposta.json();
+        return dados.usuario || null;
+    } catch (erro) {
+        return null;
+    }
+}
