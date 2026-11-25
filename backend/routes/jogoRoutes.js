@@ -1,152 +1,63 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-
 const jogoController = require('../controllers/jogoController');
+const autenticar = require('../middlewares/authMiddleware');
+const exigirAdmin = require('../middlewares/adminMiddleware');
 
 const router = express.Router();
 
-
-/* =====================================================
-   CONFIGURAÇÃO DO UPLOAD
-===================================================== */
-
 const storage = multer.diskStorage({
-
-    destination: function (req, file, cb) {
-
-        cb(
-            null,
-            path.join(__dirname, '../../imagens')
-        );
-    },
-
-    filename: function (req, file, cb) {
-
-        const extensao =
-            path.extname(file.originalname);
-
-        const nomeArquivo =
-            `jogo_${req.params.id}${extensao}`;
-
-        cb(null, nomeArquivo);
+    destination: (req, file, cb) => cb(null, path.join(__dirname, '../../imagens')),
+    filename: (req, file, cb) => {
+        const extensao = path.extname(file.originalname).toLowerCase();
+        cb(null, `jogo_${req.params.id}${extensao}`);
     }
-
 });
-
 const upload = multer({
-    storage: storage
+    storage,
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.mimetype)) {
+            return cb(new Error('Envie uma imagem JPG, PNG ou WEBP.'));
+        }
+        cb(null, true);
+    }
 });
 
+router.get('/listar', jogoController.listarJogos);
+router.get('/:id', jogoController.obterJogo);
+router.get('/:id/plataformas', jogoController.listarPlataformasDoJogo);
 
-/* =====================================================
-   CRUD
-===================================================== */
+/* Apenas administradores podem modificar o catálogo. */
+router.post('/', autenticar, exigirAdmin, jogoController.criarJogo);
+router.put('/:id', autenticar, exigirAdmin, jogoController.atualizarJogo);
+router.delete('/:id', autenticar, exigirAdmin, jogoController.deletarJogo);
+router.put('/:id/plataformas', autenticar, exigirAdmin, jogoController.associarPlataformas);
+router.post('/:id/detalhes', autenticar, exigirAdmin, jogoController.salvarDetalhes);
 
-router.get(
-    '/listar',
-    jogoController.listarJogos
-);
+router.post('/:id/imagem', autenticar, exigirAdmin, upload.single('imagem'), async (req, res) => {
+    try {
+        if (!req.file) return res.status(400).json({ erro: 'Nenhuma imagem foi enviada.' });
 
-router.get(
-    '/:id',
-    jogoController.obterJogo
-);
+        const resultado = await require('../database').query(
+            'UPDATE jogos SET imagem = $1 WHERE id_jogo = $2 RETURNING *',
+            [req.file.filename, req.params.id]
+        );
 
-router.post(
-    '/',
-    jogoController.criarJogo
-);
-
-router.put(
-    '/:id',
-    jogoController.atualizarJogo
-);
-
-router.delete(
-    '/:id',
-    jogoController.deletarJogo
-);
-
-
-/* =====================================================
-   PLATAFORMAS
-===================================================== */
-
-router.get(
-    '/:id/plataformas',
-    jogoController.listarPlataformasDoJogo
-);
-
-router.put(
-    '/:id/plataformas',
-    jogoController.associarPlataformas
-);
-
-
-/* =====================================================
-   DETALHES
-===================================================== */
-
-router.post(
-    '/:id/detalhes',
-    jogoController.salvarDetalhes
-);
-
-
-/* =====================================================
-   UPLOAD DA CAPA
-===================================================== */
-
-router.post(
-    '/:id/imagem',
-    upload.single('imagem'),
-    async (req, res) => {
-
-        try {
-
-            if (!req.file) {
-
-                return res.status(400).json({
-                    erro: 'Nenhuma imagem foi enviada.'
-                });
-            }
-
-            const nomeImagem = req.file.filename;
-
-            const resultado = await require('../database').query(`
-                UPDATE jogos
-                SET imagem = $1
-                WHERE id_jogo = $2
-                RETURNING *
-            `, [
-                nomeImagem,
-                req.params.id
-            ]);
-
-            if (resultado.rows.length === 0) {
-
-                return res.status(404).json({
-                    erro: 'Jogo não encontrado.'
-                });
-            }
-
-            res.json({
-                mensagem: 'Imagem enviada com sucesso!',
-                imagem: nomeImagem,
-                jogo: resultado.rows[0]
-            });
-
-        } catch (erro) {
-
-            console.error(erro);
-
-            res.status(500).json({
-                erro: 'Erro ao enviar imagem.'
-            });
+        if (!resultado.rows.length) {
+            return res.status(404).json({ erro: 'Jogo não encontrado.' });
         }
-    }
-);
 
+        res.json({
+            mensagem: 'Imagem enviada com sucesso!',
+            imagem: req.file.filename,
+            jogo: resultado.rows[0]
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).json({ erro: 'Erro ao enviar imagem.' });
+    }
+});
 
 module.exports = router;
