@@ -3,6 +3,11 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
+if (!process.env.COOKIE_SECRET || process.env.COOKIE_SECRET.length < 32 ||
+    process.env.COOKIE_SECRET === 'SUBSTITUA_POR_UM_SEGREDO_ALEATORIO_LONGO') {
+    throw new Error('Defina COOKIE_SECRET com pelo menos 32 caracteres aleatórios no arquivo .env.');
+}
+
 const jogoRoutes = require('./routes/jogoRoutes');
 const plataformaRoutes = require('./routes/plataformaRoutes');
 const desenvolvedoraRoutes = require('./routes/desenvolvedoraRoutes');
