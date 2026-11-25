@@ -18,7 +18,7 @@ function mensagemExibir(texto, tipo = 'success') {
 
 async function carregar() {
     try {
-        const resposta = await fetch(`${API}/plataforma/listar`);
+        const resposta = await fetch(`${API}/plataforma/listar`, { credentials: 'include' });
         if (!resposta.ok) throw new Error();
 
         plataformas = await resposta.json();
@@ -60,7 +60,7 @@ function abrirNovo() {
 
 async function editar(id) {
     try {
-        const resposta = await fetch(`${API}/plataforma/${id}`);
+        const resposta = await fetch(`${API}/plataforma/${id}`, { credentials: 'include' });
         if (!resposta.ok) throw new Error();
 
         const p = await resposta.json();
@@ -87,7 +87,7 @@ async function excluir(id) {
     if (!confirm(`Excluir "${p.nome}"?`)) return;
 
     try {
-        const resposta = await fetch(`${API}/plataforma/${id}`, {
+        const resposta = await fetch(`${API}/plataforma/${id}`, { credentials: 'include',
             method: 'DELETE'
         });
 
@@ -123,7 +123,7 @@ form.addEventListener('submit', async event => {
             modoEdicao
                 ? `${API}/plataforma/${id}`
                 : `${API}/plataforma`,
-            {
+            { credentials: 'include',
                 method: modoEdicao ? 'PUT' : 'POST',
                 headers: {
                     'Content-Type': 'application/json'
